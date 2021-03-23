@@ -1,4 +1,4 @@
-package ramzet89.dictionaryconsole.pojo;
+package ramzet89.dictionaryconsole.security;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

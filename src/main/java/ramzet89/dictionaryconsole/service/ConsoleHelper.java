@@ -5,12 +5,12 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import ramzet89.dictionaryconsole.enums.MenuItem;
-import ramzet89.dictionaryconsole.pojo.Credentials;
+import ramzet89.dictionaryconsole.security.Credentials;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.*;
-import java.util.List;
+import java.util.*;
 
 import static ramzet89.dictionaryconsole.enums.Console.*;
 
@@ -104,7 +104,7 @@ public class ConsoleHelper {
         }
         String password;
         while (true) {
-            println(USERNAME_INPUT);
+            println(PASSWORD_INPUT);
             String s = readline();
             if (s.isEmpty()) continue;
             password = s;
@@ -112,4 +112,42 @@ public class ConsoleHelper {
         }
         return new Credentials(username, password);
     }
+
+    public Set<String> inputTranslations(String english, int translationOptionSize) {
+        println("___________________________________________________");
+        println("");
+        print(english);
+        println(String.format(" : %d options", translationOptionSize));
+        Set<String> result = new HashSet<>();
+        for (int i = 0; i < translationOptionSize; i++){
+            String userInput = readline();
+            if (userInput.isBlank()) {
+                break;
+            }
+            result.add(userInput);
+        }
+        return result;
+    }
+
+    public void correctAnswer(Set<String> translations) {
+        println(CORRECT);
+        printTranslations(translations);
+    }
+
+    public void almostCorrectAnswer(Set<String> translations) {
+        println(ALMOST_CORRECT);
+        printTranslations(translations);
+    }
+
+    public void incorrectAnswer(Set<String> translations) {
+        println(INCORRECT);
+        printTranslations(translations);
+    }
+
+    private void printTranslations(Set<String> translations) {
+        println(String.format("%s: %s", CORRECT_TRANSLATIONS, Strings.join(translations, ',')));
+    }
+
+
+
 }

@@ -12,7 +12,11 @@ public enum Console {
     MENU_ITEM_INPUT("Input menu number", "Введите номер меню"),
     WRONG_MENU_NUMBER("Wrong menu number", "Неверныйы номер меню"),
     USERNAME_INPUT("Input username", "Введите имя пользователя"),
-    PASSWORD_INPUT("Input password", "Введите пароль");
+    PASSWORD_INPUT("Input password", "Введите пароль"),
+    CORRECT_TRANSLATIONS("Correct translations", "Правильный ответ"),
+    CORRECT("CORRECT!!!", "ВЕРНО!!!"),
+    ALMOST_CORRECT("Almost correct", "Почти!"),
+    INCORRECT("INCORRECT", "Неверно");
 
     private final String en;
     private final String ru;

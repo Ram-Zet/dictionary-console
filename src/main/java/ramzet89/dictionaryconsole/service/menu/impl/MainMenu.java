@@ -3,8 +3,9 @@ package ramzet89.dictionaryconsole.service.menu.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ramzet89.dictionaryconsole.enums.MenuItem;
-import ramzet89.dictionaryconsole.service.AuthentificationService;
+import ramzet89.dictionaryconsole.security.AuthentificationService;
 import ramzet89.dictionaryconsole.service.ConsoleHelper;
+import ramzet89.dictionaryconsole.service.LearnService;
 import ramzet89.dictionaryconsole.service.menu.Menu;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ public class MainMenu implements Menu {
 
     private final ConsoleHelper consoleHelper;
     private final AuthentificationService authentificationService;
+    private final LearnService learnService;
 
     private Map<MenuItem, Runnable> menuItemsMap;
     private List<MenuItem> menuItems;
@@ -26,7 +28,7 @@ public class MainMenu implements Menu {
     @PostConstruct
     private void initMenuItems() {
         menuItemsMap = Map.of(
-                MenuItem.LEARN, this::learn,
+                MenuItem.LEARN, learnService::startLearn,
                 MenuItem.EXIT, this::exit);
 
 
@@ -46,10 +48,6 @@ public class MainMenu implements Menu {
                 throw new RuntimeException("WrongMenuItem");
             }).run();
         }
-    }
-
-    private void learn() {
-        //TODO
     }
 
     private void exit() {
